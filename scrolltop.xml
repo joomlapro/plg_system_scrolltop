@@ -14,9 +14,15 @@
 		<filename>index.html</filename>
 	</files>
 	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.plg_system_scrolltop.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_system_scrolltop.sys.ini</language>
 		<language tag="pt-BR">pt-BR/pt-BR.plg_system_scrolltop.ini</language>
 		<language tag="pt-BR">pt-BR/pt-BR.plg_system_scrolltop.sys.ini</language>
 	</languages>
+	<media destination="plg_system_scrolltop" folder="media">
+		<folder>css</folder>
+		<filename>index.html</filename>
+	</media>
 	<config>
 		<fields name="params">
 			<fieldset name="basic">

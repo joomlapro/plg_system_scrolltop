@@ -36,9 +36,6 @@ class PlgSystemScrolltop extends JPlugin
 		// Get the document object.
 		$doc = JFactory::getDocument();
 
-		// Define path.
-		$path = JUri::root(true) . 'plugins/system/scrolltop';
-
 		// Add Stylesheet.
 		if ($custom_css = trim($this->params->get('custom_css')))
 		{
@@ -46,7 +43,7 @@ class PlgSystemScrolltop extends JPlugin
 		}
 		else
 		{
-			$doc->addStyleSheet($path . '/assets/css/template.css');
+			JHtml::stylesheet('plg_system_scrolltop/template.css', false, true, false);
 		}
 
 		// Add JavaScript Frameworks.
@@ -57,17 +54,17 @@ class PlgSystemScrolltop extends JPlugin
 		$script[] = 'jQuery.noConflict();';
 		$script[] = '(function($) {';
 		$script[] = '	$(function() {';
-		$script[] = '		$("body").append("<a href=\"#\" class=\"scroll-top\">' . $this->params->get('template', '<i class=\"icon-chevron-up\"></i>') . '</a>");';
+		$script[] = '		$(\'body\').append(\'<a href="#" class="scroll-top">' . $this->params->get('template', '<i class="icon-chevron-up"></i>') . '</a>\');';
 		$script[] = '		$(document).ready(function() {';
 		$script[] = '			$(window).scroll(function() {';
 		$script[] = '				if ($(this).scrollTop() > 100) {';
-		$script[] = '					$(".scroll-top").fadeIn();';
+		$script[] = '					$(\'.scroll-top\').fadeIn();';
 		$script[] = '				} else {';
-		$script[] = '					$(".scroll-top").fadeOut();';
+		$script[] = '					$(\'.scroll-top\').fadeOut();';
 		$script[] = '				}';
 		$script[] = '			});';
-		$script[] = '			$(".scroll-top").click(function() {';
-		$script[] = '				$("html, body").animate({';
+		$script[] = '			$(\'.scroll-top\').click(function() {';
+		$script[] = '				$(\'html, body\').animate({';
 		$script[] = '					scrollTop: 0';
 		$script[] = '				}, 600);';
 		$script[] = '				return false;';
