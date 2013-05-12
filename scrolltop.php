@@ -40,7 +40,7 @@ class PlgSystemScrolltop extends JPlugin
 		$path = JUri::root(true) . 'plugins/system/scrolltop';
 
 		// Add Stylesheet.
-		if ($custom_css = $this->params->get('custom_css'))
+		if ($custom_css = trim($this->params->get('custom_css')))
 		{
 			$doc->addStyleDeclaration($custom_css);
 		}
