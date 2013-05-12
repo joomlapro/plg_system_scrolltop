@@ -21,7 +21,7 @@
 		<fields name="params">
 			<fieldset name="basic">
 				<field name="template" type="text" size="40" class="inputbox" filter="raw" label="PLG_SYSTEM_SCROLLTOP_FIELD_TEMPLATE_LABEL" description="PLG_SYSTEM_SCROLLTOP_FIELD_TEMPLATE_DESC" />
-				<field name="custom_css" type="textarea" class="inputbox" cols="30" rows="3" filter="raw" label="PLG_SYSTEM_SCROLLTOP_FIELD_CUSTOM_CSS_LABEL" description="PLG_SYSTEM_SCROLLTOP_FIELD_CUSTOM_CSS_DESC" />
+				<field name="custom_css" type="editor" editor="codemirror|none" buttons="no" label="PLG_SYSTEM_SCROLLTOP_FIELD_CUSTOM_CSS_LABEL" description="PLG_SYSTEM_SCROLLTOP_FIELD_CUSTOM_CSS_DESC" height="500px" rows="20" cols="80" filter="raw" />
 			</fieldset>
 		</fields>
 	</config>
