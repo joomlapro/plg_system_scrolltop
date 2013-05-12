@@ -1,0 +1,28 @@
+@import "lesshat";
+
+/* Scroll Top */
+.scroll-top {
+	background-color: #222236;
+	background-color: rgba(0, 0, 0, 0.3);
+	color: #fff;
+	font-size: 18px;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	position: fixed;
+	bottom: 60px;
+	right: 20px;
+	display: none;
+	overflow: hidden;
+	z-index: 1000;
+	.border-radius(20px);
+	.transition(~"background 0.3s ease-in-out");
+
+	&:hover, &:focus {
+		background-color: #181826;
+		background-color: rgba(0, 0, 0, 0.5);
+		color: #fff;
+		text-decoration: none;
+	}
+}
