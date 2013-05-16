@@ -51,27 +51,22 @@ class PlgSystemScrolltop extends JPlugin
 
 		// Build the script.
 		$script = array();
-		$script[] = 'jQuery.noConflict();';
-		$script[] = '(function($) {';
-		$script[] = '	$(function() {';
-		$script[] = '		$(\'body\').append(\'<a href="#" class="scroll-top">' . $this->params->get('template', '<i class="icon-chevron-up"></i>') . '</a>\');';
-		$script[] = '		$(document).ready(function() {';
-		$script[] = '			$(window).scroll(function() {';
-		$script[] = '				if ($(this).scrollTop() > 100) {';
-		$script[] = '					$(\'.scroll-top\').fadeIn();';
-		$script[] = '				} else {';
-		$script[] = '					$(\'.scroll-top\').fadeOut();';
-		$script[] = '				}';
-		$script[] = '			});';
-		$script[] = '			$(\'.scroll-top\').click(function() {';
-		$script[] = '				$(\'html, body\').animate({';
-		$script[] = '					scrollTop: 0';
-		$script[] = '				}, 600);';
-		$script[] = '				return false;';
-		$script[] = '			});';
-		$script[] = '		});';
+		$script[] = 'jQuery(document).ready(function() {';
+		$script[] = '	jQuery(\'body\').append(\'<a href="#" class="scroll-top">' . $this->params->get('template', '<i class="icon-chevron-up"></i>') . '</a>\');';
+		$script[] = '	jQuery(window).scroll(function() {';
+		$script[] = '		if (jQuery(this).scrollTop() > 100) {';
+		$script[] = '			jQuery(\'.scroll-top\').fadeIn();';
+		$script[] = '		} else {';
+		$script[] = '			jQuery(\'.scroll-top\').fadeOut();';
+		$script[] = '		}';
 		$script[] = '	});';
-		$script[] = '})(jQuery);';
+		$script[] = '	jQuery(\'.scroll-top\').click(function() {';
+		$script[] = '		jQuery(\'html, body\').animate({';
+		$script[] = '			scrollTop: 0';
+		$script[] = '		}, 600);';
+		$script[] = '		return false;';
+		$script[] = '	});';
+		$script[] = '});';
 
 		// Add the script to the document head.
 		$doc->addScriptDeclaration(implode("\n", $script));
