@@ -7,70 +7,49 @@
  */
 
 // No direct access.
-defined('JPATH_BASE') or die;
+defined('_JEXEC') or die;
 
 /**
- * Scrolltop plugin.
+ * Script file of Scroltop Plugin.
  *
  * @package     Joomla.Plugin
- * @subpackage  System.Scrolltop
+ * @subpackage  System.Scroltop
  * @since       3.1
  */
-class PlgSystemScrolltop extends JPlugin
+class PlgSystemScrolltopInstallerScript
 {
 	/**
-	 * Method to catch the onAfterDispatch event.
+	 * Called after any type of action.
 	 *
-	 * @return  boolean  True on success
+	 * @param   string            $route    Which action is happening (install|uninstall|discover_install).
+	 * @param   JAdapterInstance  $adapter  The object responsible for running this script.
+	 *
+	 * @return  boolean  True on success.
 	 *
 	 * @since   3.1
 	 */
-	public function onAfterDispatch()
+	public function postflight($route, JAdapterInstance $adapter)
 	{
-		// Check that we are in the site application.
-		if (JFactory::getApplication()->isAdmin())
+		// Initialiase variables.
+		$db    = JFactory::getDbo();
+		$query = $db->getQuery(true);
+
+		// Create the base update statement.
+		$query->update($db->quoteName('#__extensions'))
+			->set($db->quoteName('enabled') . ' = ' . $db->quote('1'))
+			->where($db->quoteName('name') . ' = ' . $db->quote($adapter->get('name')));
+
+		// Set the query and execute the update.
+		$db->setQuery($query);
+
+		try
 		{
-			return true;
+			$db->execute();
 		}
-
-		// Get the document object.
-		$doc = JFactory::getDocument();
-
-		// Add Stylesheet.
-		if ($custom_css = trim($this->params->get('custom_css')))
+		catch (RuntimeException $e)
 		{
-			$doc->addStyleDeclaration($custom_css);
+			JError::raiseWarning(500, $e->getMessage());
+			return false;
 		}
-		else
-		{
-			JHtml::stylesheet('plg_system_scrolltop/template.css', false, true, false);
-		}
-
-		// Add JavaScript Frameworks.
-		JHtml::_('jquery.framework');
-
-		// Build the script.
-		$script = array();
-		$script[] = 'jQuery(document).ready(function() {';
-		$script[] = '	jQuery(\'body\').append(\'<a href="#" class="scroll-top">' . $this->params->get('template', '<i class="icon-chevron-up"></i>') . '</a>\');';
-		$script[] = '	jQuery(window).scroll(function() {';
-		$script[] = '		if (jQuery(this).scrollTop() > 100) {';
-		$script[] = '			jQuery(\'.scroll-top\').fadeIn();';
-		$script[] = '		} else {';
-		$script[] = '			jQuery(\'.scroll-top\').fadeOut();';
-		$script[] = '		}';
-		$script[] = '	});';
-		$script[] = '	jQuery(\'.scroll-top\').click(function() {';
-		$script[] = '		jQuery(\'html, body\').animate({';
-		$script[] = '			scrollTop: 0';
-		$script[] = '		}, 600);';
-		$script[] = '		return false;';
-		$script[] = '	});';
-		$script[] = '});';
-
-		// Add the script to the document head.
-		$doc->addScriptDeclaration(implode("\n", $script));
-
-		return true;
 	}
 }
