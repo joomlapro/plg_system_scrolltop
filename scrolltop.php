@@ -19,6 +19,28 @@ defined('JPATH_BASE') or die;
 class PlgSystemScrolltop extends JPlugin
 {
 	/**
+	 * Constructor.
+	 *
+	 * @param   object  &$subject  The object to observe.
+	 * @param   array   $config    An array that holds the plugin configuration.
+	 *
+	 * @access  protected
+	 * @since   3.1
+	 */
+	public function __construct(& $subject, $config)
+	{
+		parent::__construct($subject, $config);
+
+		$this->loadLanguage();
+
+		// Get the application.
+		$app = JFactory::getApplication();
+
+		// Save the syntax for later use.
+		$app->setUserState('editor.source.syntax', 'css');
+	}
+
+	/**
 	 * Method to catch the onAfterDispatch event.
 	 *
 	 * @return  boolean  True on success
