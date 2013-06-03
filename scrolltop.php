@@ -37,7 +37,10 @@ class PlgSystemScrolltop extends JPlugin
 		$app = JFactory::getApplication();
 
 		// Save the syntax for later use.
-		$app->setUserState('editor.source.syntax', 'css');
+		if ($app->isAdmin())
+		{
+			$app->setUserState('editor.source.syntax', 'css');
+		}
 	}
 
 	/**
